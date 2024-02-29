@@ -13,13 +13,11 @@ public class Order {
     @Column(length = 15)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer orderId;
+
     @ManyToOne
     @JoinColumn(name = "userId", referencedColumnName = "userId")
     @Column(length = 15)
     private User userId;
-
-    @Column(length = 15)
-    private String dishName;
 
     @Column(length = 15)
     private Integer totalAmount;

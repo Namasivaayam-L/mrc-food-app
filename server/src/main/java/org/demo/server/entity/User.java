@@ -20,4 +20,5 @@ public class User {
     @Column(length = 25)
     private String email;
     private Boolean isChef;
+    
 }

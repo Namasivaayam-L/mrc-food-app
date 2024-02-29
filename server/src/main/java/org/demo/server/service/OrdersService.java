@@ -9,5 +9,9 @@ public interface OrdersService {
     public Order setStatus(Integer id);
     public List<Order>getAcceptedOrders();
     public List<Order>getRejectedOrders();
-
+    public void saveOrders(Order item);
+    public Order getOrder(Integer id);
+    public void updateOrders(Integer id, Order item);
+    public void removeOrders(Integer id);
+    public List<Order> getHistoryOfOrders();
 }

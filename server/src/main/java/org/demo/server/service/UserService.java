@@ -12,6 +12,6 @@ public interface UserService {
     public User getUser(Integer id);
     public Integer getBalance(Integer id);
     public Integer updateBalance(Integer id, Integer rechargeAmount);
-    public List<OrderItem> getCurrentOrdersItems(Integer id);
+    public List<OrderItem> getCurrentOrderItems(Integer id);
     public List<Order> getHistoryOfOrders(Integer id);
 }
