@@ -1,6 +1,5 @@
 package org.demo.server.service;
 
-import org.demo.server.entity.OrderItem;
 import org.demo.server.entity.User;
 import org.demo.server.entity.Orders;
 import org.springframework.stereotype.Service;
