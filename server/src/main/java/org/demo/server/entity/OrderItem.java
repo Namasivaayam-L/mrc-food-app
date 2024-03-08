@@ -1,6 +1,8 @@
 package org.demo.server.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -8,23 +10,18 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
+@Builder
+@AllArgsConstructor
+
 public class OrderItem {
     @Id
-    @Column(length = 15)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer orderItemId;
-
     @ManyToOne
     @JoinColumn(name = "orderId", referencedColumnName = "orderId")
-    @Column(length = 15)
-    private Order orderId;
-
-    @Column(length = 15)
+    private Orders orderId;
     private Integer itemId;
-
-    @Column(length = 15)
+    private String itemName;
     private Integer quantity;
-
-    @Column(length = 15)
     private Integer subTotal;
 }

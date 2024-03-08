@@ -1,5 +1,5 @@
 import React from 'react'
-import {Routes,Route} from "react-router-dom";
+  import {Routes,Route} from "react-router-dom";
 import Home from './pages/home/home';
 import CustTodaysMenu from './pages/customer/custTodaysMenu';
 import CustOrders from './pages/customer/custOrders';

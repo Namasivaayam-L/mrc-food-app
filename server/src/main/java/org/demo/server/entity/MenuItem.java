@@ -1,6 +1,8 @@
 package org.demo.server.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -8,16 +10,12 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
+@Builder
+@AllArgsConstructor
 public class MenuItem {
     @Id
-    @Column(length = 15)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer itemId;
-
-    @Column(length = 15)
-    public String itemName;
-
-    @Column(length = 15)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer itemId;
+    private String itemName;
     private Integer price;
-
 }

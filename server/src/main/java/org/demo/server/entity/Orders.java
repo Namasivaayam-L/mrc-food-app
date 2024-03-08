@@ -1,26 +1,29 @@
 package org.demo.server.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Table
 @Entity
 @Data
 @NoArgsConstructor
-public class Order {
-    @Id
-    @Column(length = 15)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer orderId;
+@Builder
+@AllArgsConstructor
 
+public class Orders {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer orderId;
     @ManyToOne
     @JoinColumn(name = "userId", referencedColumnName = "userId")
-    @Column(length = 15)
     private User userId;
-
-    @Column(length = 15)
     private Integer totalAmount;
-
-    private Boolean status;
+    private String status;
+    @OneToMany(mappedBy = "orderId", cascade = CascadeType.ALL)
+    private List<OrderItem> orderItemList;
 }

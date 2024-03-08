@@ -1,24 +1,28 @@
 package org.demo.server.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Table
 @Entity
 @Data
 @NoArgsConstructor
+@Builder
+@AllArgsConstructor
+
 public class User {
     @Id
-    @Column(length = 15)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer userId;
-    @Column(length = 15)
     private String userName;
-    @Column(length = 15)
     private Integer balance;
-    @Column(length = 25)
     private String email;
     private Boolean isChef;
-    
+    @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL)
+    private List<Orders> ordersList;
 }
