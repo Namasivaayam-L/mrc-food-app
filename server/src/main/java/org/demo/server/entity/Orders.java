@@ -24,6 +24,5 @@ public class Orders {
     private User userId;
     private Integer totalAmount;
     private String status;
-    @OneToMany(mappedBy = "orderId", cascade = CascadeType.ALL)
-    private List<OrderItem> orderItemList;
+    private String orderList;
 }

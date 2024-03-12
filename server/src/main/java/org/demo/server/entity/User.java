@@ -20,6 +20,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer userId;
     private String userName;
+    private String password;
     private Integer balance;
     private String email;
     private Boolean isChef;

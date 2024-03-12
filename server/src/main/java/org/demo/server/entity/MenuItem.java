@@ -18,4 +18,7 @@ public class MenuItem {
     private Integer itemId;
     private String itemName;
     private Integer price;
+    private String category;
+    private Boolean isInTodaysMenu;
+    private byte[] image;
 }
