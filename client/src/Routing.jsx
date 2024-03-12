@@ -5,6 +5,7 @@ import CustTodaysMenu from './pages/customer/custTodaysMenu';
 import CustOrders from './pages/customer/custOrders';
 import ChefOrders from './pages/chef/chefOrders';
 import ChefTodaysMenu from './pages/chef/chefTodaysMenu';
+import { Test } from './pages/customer/test';
 
 const Routing = () => {
   return (
@@ -14,6 +15,7 @@ const Routing = () => {
         <Route path='/cust/orders' element={<CustOrders/>}/>
         <Route path='/chef/todaysMenu' element={<ChefTodaysMenu/>}/>
         <Route path='/chef/orders' element={<ChefOrders/>}/> 
+        <Route path='/test' element={<Test/>}/>
     </Routes>
   )
 }
