@@ -1,5 +1,6 @@
 package org.demo.server.implementations;
 
+import org.demo.server.entity.MenuItem;
 import org.demo.server.entity.Orders;
 import org.demo.server.entity.User;
 import org.demo.server.repository.UserRepository;
@@ -40,7 +41,7 @@ public class UserImpl implements UserService {
     }
 
     @Override
-    public List<OrderItem> getCurrentOrderItems(Integer userId) {
+    public List<MenuItem> getCurrentOrderItems(Integer userId) {
         List<Orders> ordersList = userRepository.findById(userId).orElse(null).getOrdersList();
 //        if(ordersList!=null){
 //            return ordersList.stream()

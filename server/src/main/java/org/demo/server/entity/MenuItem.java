@@ -5,9 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.query.Order;
-
-import java.util.List;
 
 @Table
 @Entity
@@ -23,5 +20,5 @@ public class MenuItem {
     private Integer price;
     private String category;
     private Boolean isInTodaysMenu;
-    private Byte[] image;
+    private byte[] image;
 }
