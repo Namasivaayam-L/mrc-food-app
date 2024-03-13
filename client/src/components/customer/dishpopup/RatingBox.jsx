@@ -1,7 +1,7 @@
 import { Button, Rating, TextField } from "@mui/material";
 import React from "react";
 
-export const RatingBox = () => {
+export const RatingBox = ({cancelFunction}) => {
   const [userRating, setUserRating] = React.useState(0);
   return (
     <div style={{width:"100%"}}>
@@ -23,7 +23,7 @@ export const RatingBox = () => {
         <Button style={{ margin: "10px" }} variant="contained" size="small">
           Submit
         </Button>
-        <Button style={{ margin: "10px" }} variant="contained" size="small">
+        <Button style={{ margin: "10px" }} onClick={()=>cancelFunction()} variant="contained" size="small">
           cancel
         </Button>
       </div>

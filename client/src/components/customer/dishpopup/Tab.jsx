@@ -8,8 +8,8 @@ import { Reviews } from "./Reviews";
 import { Rating } from "@mui/material";
 import { RatingBox } from "./RatingBox";
 
-export const BottomTab = () => {
-  const [value, setValue] = React.useState(0);
+export const BottomTab = ({cancelFunction}) => {
+  const [value, setValue] = React.useState("1");
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -24,7 +24,7 @@ export const BottomTab = () => {
           </TabList>
         </Box>
         <TabPanel value="1"><Reviews/></TabPanel>
-        <TabPanel value="2" ><RatingBox/></TabPanel>
+        <TabPanel value="2"><RatingBox cancelFunction={cancelFunction} /></TabPanel>
       </TabContext>
     </Box>
   );

@@ -25,7 +25,7 @@ export default function DishPopup() {
   };
 
   const handleDecrementCounter = () => {
-    setCount((prevState) => prevState - 1);
+    if(count!=0) setCount((prevState) => prevState - 1);
   };
 
   const profileStyle = {
@@ -33,7 +33,7 @@ export default function DishPopup() {
     backgroundSize: "cover",
     backgroundPosition: "center",
     position: "relative",
-    width: "500px",
+    width: "600px",
     height: "900px",
   };
 
@@ -55,16 +55,14 @@ export default function DishPopup() {
       <Dialog
         open={open}
         onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-        style={{height:"600px",display:"flex",alignItems: "center",justifyContent:"center"}}
+        style={{height:"650px",display:"flex",alignItems: "center",justifyContent:"center"}}
       >
         <Box sx={profileStyle}>
           <div>
             <img
               src="../src/assets/banner.jpg"
               alt=""
-              style={{ width: "500px", height: "120px" }}
+              style={{ width: "600px", height: "120px" }}
             />
           </div>
           <div>
@@ -76,9 +74,8 @@ export default function DishPopup() {
             <div
               style={{
                 padding: "65px 5px 0 5px",
-                margin: "0",
+                margin: "5px",
                 display: "flex",
-                // width:"500px",
                 flexDirection: "row",
                 justifyContent: "space-between",
                 alignItems: "center",
@@ -105,11 +102,11 @@ export default function DishPopup() {
                 style={{
                   border: "1px solid blue",
                   borderRadius: "10px",
-                  width: "30.5%",
+                  width: "auto",
                   height: "20%",
                   alignItems: "center",
                   justifyContent:"space-evenly",
-                  margin: "0",
+                  margin: "6px",
                 }}
               >
                 <Button onClick={handleIncrementCounter} size="small">
@@ -128,20 +125,14 @@ export default function DishPopup() {
             flexDirection: "column",
             justifyContent: "left",
             alignItems: "flex-start",
+            margin: "5px",
           }}
         >
           <h4 style={{ padding: "0 0 5px 5px", margin: "0" }}>
             Spice up your life, one biryani bite at a time. 🌶️🍚 #BiryaniBliss
           </h4>
           <h4 style={{ padding: "0 0 5px 5px", margin: "0" }}>Price: $10</h4>
-          <BottomTab></BottomTab>
-          {/* {enableRating ? (
-            <RatingBox />
-          ) : (
-            <Button onClick={() => setEnableRating(!enableRating)} size="small">
-              Rate & review
-            </Button>
-          )} */}
+          <BottomTab cancelFunction={handleClose}></BottomTab>
         </div>
         </Box>
         
