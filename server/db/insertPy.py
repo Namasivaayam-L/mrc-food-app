@@ -1,101 +1,95 @@
-import mysql.connector, random, string
+import mysql.connector
+import random
+import string
 
-# Database connection details
-DB_NAME = "mrc_food_app"
-DB_USER = "root"
-DB_PASSWORD = "root"
-DB_HOST = "localhost"  # Modify if your database is on a different host
+# Common names list
+common_names = [
+    "James", "John", "Robert", "Michael", "William", 
+    "David", "Richard", "Joseph", "Thomas", "Charles", 
+    "Mary", "Patricia", "Jennifer", "Linda", "Elizabeth", 
+    "Barbara", "Susan", "Jessica", "Sarah", "Karen"
+    # Add more names as needed
+]
 
-# Functions for generating random data (replace with your own logic if needed)
-def generate_username():
-    return f"RandomUser{random.randint(1, 100)}"
+# Function to generate a random item name
+def generate_random_item_name():
+    food_adjectives = ['Spicy', 'Tasty', 'Delicious', 'Sizzling', 'Savory', 'Zesty', 'Flavorful', 'Juicy', 'Crunchy', 'Creamy']
+    food_nouns = ['Burger', 'Pizza', 'Pasta', 'Salad', 'Taco', 'Sushi', 'Sandwich', 'Curry', 'Steak', 'Ramen']
+    return f"{random.choice(food_adjectives)} {random.choice(food_nouns)}"
+                                
+# Function to generate a random username
+def generate_random_username():
+    return random.choice(common_names) + str(random.randint(100, 999))
 
-def generate_password():
-    # Replace with a more secure password generation logic
-    return f"{random.choice(string.ascii_letters)}{random.randint(1000, 9999)}"
+# Function to generate a random email address
+def generate_random_email():
+    return ''.join(random.choices(string.ascii_lowercase, k=8)) + "@example.com"
 
-def generate_balance():
-    return random.randint(50, 500)
+# Function to insert random values into the menu_item table
+def insert_random_menu_items(cursor, num_items):
+    for i in range(num_items):
+        item_id = i + 1
+        category = random.choice(["Appetizer", "Main Course", "Dessert", "Beverage"])
+        is_in_todays_menu = random.choice([0, 1])
+        item_name = generate_random_item_name()
+        price = round(random.uniform(5.0, 50.0), 2)
+        cursor.execute("INSERT INTO menu_item (item_id, category, image, is_in_todays_menu, item_name, price) VALUES (%s, %s, %s, %s, %s, %s)", (item_id, category, None, is_in_todays_menu, item_name, price))
+    print(f"{num_items} menu items inserted successfully.")
 
-def generate_email(username):
-    return f"{username}@example.com"
+# Function to insert random values into the user table
+def insert_random_users(cursor, num_users):
+    for i in range(num_users):
+        user_id = i + 1
+        balance = round(random.uniform(10.0, 100.0), 2)
+        user_name = generate_random_username()
+        email =  user_name + "@example.com"
+        is_chef = random.choice([0, 1])
+        password = ''.join(random.choices(string.ascii_letters + string.digits, k=8))
+        cursor.execute("INSERT INTO user (user_id, balance, email, is_chef, password, user_name) VALUES (%s, %s, %s, %s, %s, %s)", (user_id, balance, email, is_chef, user_name, user_name))
+    print(f"{num_users} users inserted successfully.")
+    
+# Function to generate a random order list
+def generate_order_list(cursor):
+    cursor.execute("SELECT item_id FROM menu_item")
+    menu_items = cursor.fetchall()
+    order_list = random.sample(menu_items, random.randint(1, 5))
+    return ','.join([str(item[0]) for item in order_list])
 
-def generate_is_chef():
-    return random.randint(0, 1)  # 0 for false, 1 for true
-
-def generate_total_amount():
-    return random.randint(20, 100)
-
-def generate_order_status():
-    options = ["PENDING", "PROCESSING", "COMPLETED"]
-    return random.choice(options)
-
-def generate_order_list():
-    item1 = random.randint(1, 10)
-    item2 = random.randint(11, 20)
-    return f"item{item1},item{item2}"
-
-def generate_item_name():
-    return f"{random.choice(string.ascii_letters)}{random.randint(10, 20)} {random.choice(string.ascii_letters)}{random.randint(5, 15)}"
-
-def generate_price():
-    return random.randint(10, 50)
-
-def generate_category():
-    options = ["Pizzas", "Burgers", "Drinks", "Salads"]
-    return random.choice(options)
-
-def generate_is_in_todays_menu():
-    return random.randint(0, 1)  # 0 for false, 1 for true
-
-# Connect to the database
-connection = mysql.connector.connect(
-    host=DB_HOST,
-    user=DB_USER,
-    password=DB_PASSWORD,
-    database=DB_NAME
+# Function to insert random values into the order table
+def insert_random_orders(cursor, num_orders):
+    for i in range(num_orders):
+        order_id = i + 1
+        order_list = generate_order_list(cursor)
+        status = random.choice(["inCart", "Processing", "Completed"])
+        total_amount = random.uniform(10.0, 100.0)
+        user_id = random.randint(1, 50)
+        cursor.execute("INSERT INTO orders (order_id, order_list, status, total_amount, user_id) VALUES (%s, %s, %s, %s, %s)", (order_id, order_list, status, total_amount, user_id))
+    print(f"{num_orders} orders inserted successfully.")
+    
+conn = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    password="root",
+    database="mrc_food_app"
 )
+# Check if connection is successful
+if conn.is_connected():
+    cursor = conn.cursor()
 
-cursor = connection.cursor()
+    # Define the number of menu items and users to insert
+    num_items = 50
+    num_users = 50
+    num_orders = 50
 
-# Generate and insert data (adjust loop count and function calls as needed)
-for _ in range(10):  # Adjust loop count for number of inserts
+    # Insert random menu items and users
+    # insert_random_menu_items(cursor, num_items)
+    # insert_random_users(cursor, num_users)
+    insert_random_orders(cursor, num_orders)
+    # Commit the transaction
+    conn.commit()
 
-    # Generate User data
-    username = generate_username()
-    password = generate_password()
-    balance = generate_balance()
-    email = generate_email(username)
-    is_chef = generate_is_chef()
-
-    # Call insert_user function
-    cursor.callproc(DB_NAME+".insert_user", (username, password, balance, email, is_chef))
-
-    user_id = cursor.lastrowid  # Get the inserted user ID
-
-    # Generate and insert Orders data (assuming 1-3 orders per user)
-    for _ in range(random.randint(1, 3)):
-
-        total_amount = generate_total_amount()
-        status = generate_order_status()
-        order_list = generate_order_list()
-
-        # Call insert_order function
-        cursor.callproc(DB_NAME+".insert_order", (user_id, total_amount, status, order_list))
-
-    # Generate and insert MenuItem data (assuming 5-10 menu items)
-    for _ in range(random.randint(5, 10)):
-
-        item_name = generate_item_name()
-        price = generate_price()
-        category = generate_category()
-        is_in_todays_menu = generate_is_in_todays_menu()
-
-        # Call insert_menu_item function
-        cursor.callproc(DB_NAME+".insert_menu_item", (item_name, price, category, is_in_todays_menu, None))  # None for image data
-
-connection.commit()
-cursor.close()
-connection.close()
-
-print("Data insertion completed!")
+    # Close the cursor and connection
+    cursor.close()
+    conn.close()
+else:
+    print("Failed to connect to MySQL.")
