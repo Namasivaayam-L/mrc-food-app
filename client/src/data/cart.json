@@ -1,0 +1,30 @@
+[
+    {
+        "itemName":"Ambur briyani",
+        "itemCount":2,
+        "price":120,
+        "subTotal":240,
+        "itemRating":4
+    },
+    {
+        "itemName":"Hyderabad briyani",
+        "itemCount":2,
+        "price":120,
+        "subTotal":240,
+        "itemRating":4
+    },
+    {
+        "itemName":"Panner soda",
+        "itemCount":3,
+        "price":35,
+        "subTotal":70,
+        "itemRating":4
+    },
+    {
+        "itemName":"Veg briyani",
+        "itemCount":2,
+        "price":90,
+        "subTotal":180,
+        "itemRating":4
+    }
+]
